@@ -8,18 +8,30 @@ const ITEMS_PER_PAGE = 15;
 const Shop = () => {
   const { products, loading } = useProducts();
 
-  const [category, setCategory] = useState("all");
-  const [sort, setSort] = useState("default");
-  const [currentPage, setCurrentPage] = useState(1);
+const [category, setCategory] = useState("all");
+const [sort, setSort] = useState("default");
+const [currentPage, setCurrentPage] = useState(1);
+
+// price range
+const MIN_PRICE = 15;
+const MAX_PRICE = 100;
+
+const [priceRange, setPriceRange] = useState(MAX_PRICE);
+
 
   // 🔹 Dynamic categories
-  const categories = ["all", ...new Set(products.map(p => p.category))];
+  const categories = [...new Set(products.map(p => p.category))];
 
   // 🔹 FILTER
-  const filtered =
-    category === "all"
-      ? products
-      : products.filter(p => p.category === category);
+const filtered = products.filter(p => {
+  const matchCategory =
+    category === "all" || p.category === category;
+
+  const matchPrice = p.price <= priceRange;
+
+  return matchCategory && matchPrice;
+});
+
 
   // 🔹 SORT
   const sorted = [...filtered].sort((a, b) => {
@@ -48,29 +60,65 @@ const Shop = () => {
     <div className="shop-page container">
       {/* SIDEBAR */}
       <aside className="shop-filters">
-        <h3>Filters</h3>
+  <div className="filters-header">
+    <h3>Filters</h3>
+    <button
+      className="clear-link"
+      onClick={() => {
+  setCategory("all");
+  setSort("default");
+  setPriceRange(MAX_PRICE);
+}}
 
-        <div className="filter-group">
-          <label>Category</label>
-          <select value={category} onChange={e => setCategory(e.target.value)}>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>
-                {cat.replace("-", " ").toUpperCase()}
-              </option>
-            ))}
-          </select>
-        </div>
+    >
+      Clear All
+    </button>
+  </div>
 
+  {/* PRICE RANGE */}
+  <div className="filter-section">
+    <h4>Price Range</h4>
+
+    <input
+  type="range"
+  min={MIN_PRICE}
+  max={MAX_PRICE}
+  value={priceRange}
+  onChange={(e) => setPriceRange(Number(e.target.value))}
+/>
+
+    <div className="price-values">
+  <span>${MIN_PRICE}</span>
+  <span>${priceRange}</span>
+</div>
+
+  </div>
+
+  {/* CATEGORY */}
+  <div className="filter-section">
+    <h4>Category</h4>
+
+    <div className="chip-group">
+      <button
+        className={`chip ${category === "all" ? "active" : ""}`}
+        onClick={() => setCategory("all")}
+      >
+        All
+      </button>
+
+      {categories.map(cat => (
         <button
-          className="clear-btn"
-          onClick={() => {
-            setCategory("all");
-            setSort("default");
-          }}
+          key={cat}
+          className={`chip ${category === cat ? "active" : ""}`}
+          onClick={() => setCategory(cat)}
         >
-          Clear Filters
+          {cat.replace("-", " ")}
         </button>
-      </aside>
+      ))}
+    </div>
+  </div>
+</aside>
+
 
       {/* MAIN */}
       <section className="shop-content">

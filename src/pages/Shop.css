@@ -10,8 +10,14 @@
   background: white;
   border-radius: 16px;
   padding: 20px;
-  height: fit-content;
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .shop-filters h3 {
@@ -45,6 +51,14 @@
   font-weight: 600;
 }
 
+.clear-link {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-weight: 500;
+}
+
 /* CONTENT */
 .shop-content {
   display: flex;
@@ -62,6 +76,49 @@
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
+}
+/* sections */
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.filter-section h4 {
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+/* price */
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* chips */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chip:hover {
+  background: #f8fafc;
+}
+
+.chip.active {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: white;
+  border-color: transparent;
 }
 
 /* RESPONSIVE */
