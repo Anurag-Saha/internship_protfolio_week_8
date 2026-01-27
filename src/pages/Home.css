@@ -140,51 +140,42 @@
 }
 
 .category-grid {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+  display: flex;
+  justify-content: center;   
+  gap: 14px;
+  padding: 10px 0;
+  flex-wrap: wrap;          
 }
 
+
 .category-card:hover {
-  transform: translateY(-6px) scale(1.04);
+  background: #f8fafc;
+  transform: translateY(-2px);
 }
 
 
 .category-card {
-  background: linear-gradient(
-    270deg,
-    #030307,
-    #a183f3,
-    #304d52,
-    #63cc33,
-    #0dd4ca,
-    #ee57b4,
-    #22d3ee
-  );
-
-  background-size: 600% 600%;
-  background-position: 0% 50%;
-
-  color: white;
-  padding: 40px;
+  padding: 10px 18px;
   border-radius: 999px;
-  font-size: 1.2rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #020617;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  text-align: center;
+  white-space: nowrap;
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: gradientShift 5s ease infinite;
+  transition: all 0.25s ease;
 }
 
 
 /* neutralize active */
 .category-card.active {
-  box-shadow: 0 20px 45px rgba(99, 102, 241, 0.55);
-  transform: translateY(-8px) scale(1.06);
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
 }
-
-
 
 .products {
   padding: 100px 20px;

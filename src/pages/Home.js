@@ -61,26 +61,26 @@ const Home = () => {
         ))}
       </section>
 
-      {/* CATEGORIES */}
-      <section className="categories">
+{/* CATEGORIES */}
+<section className="categories">
   <h2>Shop by Category</h2>
 
   <div className="category-grid">
     {[
-      { label: "All", value: "all" },
-      { label: "Electronics", value: "electronics" },
-      { label: "Fashion", value: "men's clothing" },
-      { label: "Jewellery", value: "jewelery" }
-    ].map((cat, i) => (
+      "all",
+      ...new Set(products.map(p => p.category))
+    ].map((cat) => (
       <motion.div
-        key={cat.value}
+        key={cat}
         className={`category-card ${
-          selectedCategory === cat.value ? "active" : ""
+          selectedCategory === cat ? "active" : ""
         }`}
         whileHover={{ y: -10, scale: 1.05 }}
-        onClick={() => setSelectedCategory(cat.value)}
+        onClick={() => setSelectedCategory(cat)}
       >
-        {cat.label}
+        {cat === "all"
+          ? "ALL"
+          : cat.replace("-", " ").toUpperCase()}
       </motion.div>
     ))}
   </div>
@@ -92,13 +92,14 @@ const Home = () => {
         <h2>Featured Products</h2>
         {!loading && (
   <ProductList
-    products={
-      selectedCategory === "all"
-        ? products
-        : products.filter(p => p.category === selectedCategory)
-    }
-    limit={7}
-  />
+  products={
+    selectedCategory === "all"
+      ? products
+      : products.filter(p => p.category === selectedCategory)
+  }
+  limit={7}
+/>
+
 )}
 
       </section>
