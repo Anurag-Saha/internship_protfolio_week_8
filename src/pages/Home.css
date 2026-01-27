@@ -1,0 +1,180 @@
+.home {
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #6366f1, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 700px;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3.8rem;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa);
+  background-clip: text;          
+  -webkit-background-clip: text;  
+  color: transparent;
+}
+
+
+.hero p {
+  opacity: 0.85;
+  font-size: 1.2rem;
+  margin-bottom: 32px;
+}
+
+.hero-btn {
+  background: linear-gradient(90deg, #22d3ee, #6366f1);
+  padding: 14px 34px;
+  border-radius: 999px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+}
+
+/* BLOBS */
+.blob {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  filter: blur(120px);
+  opacity: 0.5;
+}
+
+.blob1 {
+  background: #22d3ee;
+  top: 10%;
+  left: 10%;
+}
+
+.blob2 {
+  background: #a78bfa;
+  bottom: 10%;
+  right: 10%;
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.feature-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  animation: slideUp 0.8s ease forwards;
+}
+
+.feature-card h3 {
+  margin: 10px 0;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  color: rgb(0, 0, 0);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.stat-card h2 {
+  font-size: 2.4rem;
+}
+
+/* CATEGORIES */
+.categories {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.category-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.category-card {
+  background: linear-gradient(135deg, #2563eb, #e546e5);
+  color: white;
+  padding: 40px;
+  border-radius: 24px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* neutralize active */
+.category-card.active {
+  background: linear-gradient(135deg, #2563eb, #e546e5);
+  box-shadow: none;
+  transform: none;
+}
+
+
+.products {
+  padding: 100px 20px;
+  background: linear-gradient(
+    to bottom,
+    #f8fafc,
+    #eef2ff
+  );
+}
+
+.products h2 {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #020617;
+}
+
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
