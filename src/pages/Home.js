@@ -3,11 +3,13 @@ import ProductList from "../components/ProductList/ProductList";
 import "./Home.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useProducts from "../hooks/useProducts";
 
 
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState("all");
+    const { products, loading } = useProducts();
 
   return (
     <div className="home">
@@ -88,7 +90,17 @@ const Home = () => {
       {/* PRODUCTS */}
       <section id="products" className="products">
         <h2>Featured Products</h2>
-        <ProductList category={selectedCategory} limit={7} />
+        {!loading && (
+  <ProductList
+    products={
+      selectedCategory === "all"
+        ? products
+        : products.filter(p => p.category === selectedCategory)
+    }
+    limit={7}
+  />
+)}
+
       </section>
     </div>
   );
