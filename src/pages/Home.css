@@ -25,12 +25,27 @@
 }
 
 .hero h1 span {
-  background: linear-gradient(90deg, #22d3ee, #a78bfa);
-  background-clip: text;          
-  -webkit-background-clip: text;  
-  color: transparent;
-}
+  background: linear-gradient(
+    270deg,
+    #22d3ee,
+    #6366f1,
+    #a78bfa,
+    #22d3ee,
+    #a322ee,
+    #4446ec,
+    #8c57ee,
+    #22d3ee
+  );
 
+  background-size: 600% 600%;
+  background-position: 0% 50%;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  animation: gradientShift 6s ease infinite;
+}
 
 .hero p {
   opacity: 0.85;
@@ -131,22 +146,44 @@
   gap: 24px;
 }
 
+.category-card:hover {
+  transform: translateY(-6px) scale(1.04);
+}
+
+
 .category-card {
-  background: linear-gradient(135deg, #2563eb, #e546e5);
+  background: linear-gradient(
+    270deg,
+    #030307,
+    #a183f3,
+    #304d52,
+    #63cc33,
+    #0dd4ca,
+    #ee57b4,
+    #22d3ee
+  );
+
+  background-size: 600% 600%;
+  background-position: 0% 50%;
+
   color: white;
   padding: 40px;
-  border-radius: 24px;
+  border-radius: 999px;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  text-align: center;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: gradientShift 5s ease infinite;
 }
+
 
 /* neutralize active */
 .category-card.active {
-  background: linear-gradient(135deg, #2563eb, #e546e5);
-  box-shadow: none;
-  transform: none;
+  box-shadow: 0 20px 45px rgba(99, 102, 241, 0.55);
+  transform: translateY(-8px) scale(1.06);
 }
+
 
 
 .products {
@@ -178,3 +215,14 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
