@@ -1,11 +1,12 @@
-const BASE_URL = "https://fakestoreapi.com";
+const BASE_URL = "https://dummyjson.com";
 
-export const getProducts = async () => {
-  const res = await fetch(`${BASE_URL}/products`);
-  return res.json();
+export const fetchProducts = async () => {
+  const res = await fetch(`${BASE_URL}/products?limit=60`);
+  const data = await res.json();
+  return data.products;
 };
 
-export const getProduct = async (id) => {
+export const fetchProductById = async (id) => {
   const res = await fetch(`${BASE_URL}/products/${id}`);
   return res.json();
 };
