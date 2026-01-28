@@ -25,7 +25,10 @@
   );
   opacity: 0;
   transition: opacity 0.4s;
+
+  pointer-events: none; 
 }
+
 
 .card:hover::before {
   opacity: 1;

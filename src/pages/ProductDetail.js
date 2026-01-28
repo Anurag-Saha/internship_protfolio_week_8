@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { fetchProductById } from "../services/api";
 import { useCart } from "../contexts/CartContext";
+import "./ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -20,26 +22,89 @@ const ProductDetail = () => {
     loadProduct();
   }, [id]);
 
-  if (loading) return <p style={{ padding: 20 }}>Loading...</p>;
+  if (loading) return <p className="pd-loading">Loading product…</p>;
 
   return (
-    <div className="container">
-      <div className="product-detail-card">
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          style={{ height: 300, objectFit: "contain" }}
-        />
+    <motion.div
+      className="product-detail container"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* TOP SECTION */}
+      <div className="pd-top">
+        {/* IMAGE */}
+        <motion.div
+          className="pd-image"
+          whileHover={{ scale: 1.05 }}
+        >
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+          />
+        </motion.div>
 
-        <h2>{product.title}</h2>
-        <h3>${product.price}</h3>
-        <p>{product.description}</p>
+        {/* INFO */}
+        <div className="pd-info">
+          <h1>{product.title}</h1>
 
-        <button onClick={() => addToCart(product)}>
-          Add to Cart
-        </button>
+          <div className="pd-meta">
+            <span className="price">${product.price}</span>
+            <span className="rating">⭐ {product.rating}</span>
+            <span className="stock">
+              {product.stock > 0 ? "In Stock" : "Out of Stock"}
+            </span>
+          </div>
+
+          <p className="description">{product.description}</p>
+
+          <div className="pd-actions">
+            <button
+              className="add-btn"
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+
+            <button className="buy-btn">
+              Buy Now
+            </button>
+          </div>
+
+          <div className="pd-tags">
+            <span>Category: {product.category}</span>
+            <span>Brand: {product.brand}</span>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* EXTRA CONTENT */}
+      <div className="pd-extra">
+        <div className="pd-card">
+          <h3>Why you’ll love it</h3>
+          <ul>
+            <li>Premium build quality</li>
+            <li>High customer satisfaction</li>
+            <li>Modern design & durability</li>
+            <li>Trusted brand assurance</li>
+          </ul>
+        </div>
+
+        <div className="pd-card">
+          <h3>Delivery & Returns</h3>
+          <p>🚚 Free delivery within 3–5 business days.</p>
+          <p>↩️ Easy 7-day return policy.</p>
+          <p>🔒 Secure & safe checkout.</p>
+        </div>
+
+        <div className="pd-card">
+          <h3>Secure Shopping</h3>
+          <p>✔ 100% genuine products</p>
+          <p>✔ Encrypted transactions</p>
+          <p>✔ Trusted sellers</p>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 

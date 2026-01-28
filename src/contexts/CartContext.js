@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+const addToCart = (product) => {
   setCart(prev => {
     const existing = prev.find(item => item.id === product.id);
 
@@ -23,9 +23,17 @@ export const CartProvider = ({ children }) => {
       );
     }
 
-    return [...prev, { ...product, qty: 1 }];
+    return [
+      ...prev,
+      {
+        ...product,
+        thumbnail: product.thumbnail || product.image,
+        qty: 1
+      }
+    ];
   });
 };
+
 const increaseQty = (id) => {
   setCart(cart.map(item =>
     item.id === id ? { ...item, qty: item.qty + 1 } : item
