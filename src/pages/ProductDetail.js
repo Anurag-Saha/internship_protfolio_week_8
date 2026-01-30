@@ -4,13 +4,20 @@ import { motion } from "framer-motion";
 import { fetchProductById } from "../services/api";
 import { useCart } from "../contexts/CartContext";
 import "./ProductDetail.css";
-
+import { useNavigate } from "react-router-dom";
+ 
 const ProductDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const handleBuyNow = () => {
+  addToCart(product);
+  navigate("/checkout");
+};
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -66,7 +73,7 @@ const ProductDetail = () => {
               Add to Cart
             </button>
 
-            <button className="buy-btn">
+            <button className="buy-btn" onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>
