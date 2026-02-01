@@ -1,21 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../../contexts/CartContext";
 import { useAuth } from "../../contexts/AuthContext";
 import "./Navbar.css";
 
 const Navbar = () => {
   const { cartCount } = useCart();
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        {/* LOGO */}
         <NavLink to="/" className="logo">
           Trendsy
         </NavLink>
 
-        {/* LINKS */}
         <div className="nav-links">
           <NavLink to="/shop" className="nav-link">
             Shop
@@ -33,7 +32,10 @@ const Navbar = () => {
               Logout
             </button>
           ) : (
-            <button className="nav-btn" onClick={login}>
+            <button
+              className="nav-btn"
+              onClick={() => navigate("/login")}
+            >
               Login
             </button>
           )}

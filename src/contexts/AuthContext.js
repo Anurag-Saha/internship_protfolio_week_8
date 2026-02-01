@@ -1,16 +1,22 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useCart } from "./CartContext";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  const [user, setUser] = useState(null);
   const { clearCart } = useCart();
 
-  const login = () => {
-    const fakeUser = { email: "user@test.com" };
+  // 🔹 hydrate user on reload
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const login = (email) => {
+    const fakeUser = { email };
     setUser(fakeUser);
     localStorage.setItem("user", JSON.stringify(fakeUser));
   };
