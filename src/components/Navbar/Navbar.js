@@ -4,15 +4,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { cart } = useCart();
+  const { cartCount } = useCart();
   const { user, login, logout } = useAuth();
-
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
   return (
     <nav className="navbar">
       <div className="nav-inner">
-
         {/* LOGO */}
         <NavLink to="/" className="logo">
           Trendsy
@@ -26,8 +23,8 @@ const Navbar = () => {
 
           <NavLink to="/cart" className="nav-link cart-link">
             Cart
-            {totalQty > 0 && (
-              <span className="cart-badge">{totalQty}</span>
+            {cartCount > 0 && (
+              <span className="cart-badge">{cartCount}</span>
             )}
           </NavLink>
 
@@ -41,7 +38,6 @@ const Navbar = () => {
             </button>
           )}
         </div>
-
       </div>
     </nav>
   );

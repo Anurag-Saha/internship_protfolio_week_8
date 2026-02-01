@@ -1,16 +1,16 @@
-import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 import "./CartPage.css";
 
 const CartPage = () => {
-  const { cart, removeFromCart, increaseQty, decreaseQty } = useCart();
+  const {
+    cartItems,
+    removeFromCart,
+    updateQuantity,
+    cartTotal,
+  } = useCart();
 
-  const subtotal = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
-
-  if (cart.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="cart-empty">
         <h2>Your cart is empty 🛒</h2>
@@ -26,12 +26,12 @@ const CartPage = () => {
       <h2 className="cart-title">Your Cart</h2>
 
       <div className="cart-layout">
-        {/* LEFT: ITEMS */}
+        {/* LEFT: CART ITEMS */}
         <div className="cart-items">
-          {cart.map(item => (
+          {cartItems.map((item) => (
             <div className="cart-item" key={item.id}>
               <img
-                src={item.thumbnail || item.imagewhe}
+                src={item.thumbnail || item.image}
                 alt={item.title}
                 className="cart-img"
               />
@@ -41,16 +41,31 @@ const CartPage = () => {
                 <p className="price">${item.price.toFixed(2)}</p>
 
                 <div className="qty-control">
-                  <button onClick={() => decreaseQty(item.id)}>-</button>
-                  <span>{item.qty}</span>
-                  <button onClick={() => increaseQty(item.id)}>+</button>
+                  <button
+                    onClick={() =>
+                      updateQuantity(item.id, item.quantity - 1)
+                    }
+                  >
+                    -
+                  </button>
+
+                  <span>{item.quantity}</span>
+
+                  <button
+                    onClick={() =>
+                      updateQuantity(item.id, item.quantity + 1)
+                    }
+                  >
+                    +
+                  </button>
                 </div>
               </div>
 
               <div className="cart-actions">
                 <p className="item-total">
-                  ${(item.price * item.qty).toFixed(2)}
+                  ${(item.price * item.quantity).toFixed(2)}
                 </p>
+
                 <button
                   className="remove-btn"
                   onClick={() => removeFromCart(item.id)}
@@ -68,7 +83,7 @@ const CartPage = () => {
 
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${cartTotal.toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
@@ -80,7 +95,7 @@ const CartPage = () => {
 
           <div className="summary-row total">
             <span>Total</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${cartTotal.toFixed(2)}</span>
           </div>
 
           <Link to="/checkout" className="btn-primary">
