@@ -1,13 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <CartProvider>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </CartProvider>
+import ErrorBoundary from "./components/ErrorBoundary";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+    <ErrorBoundary>
+      <CartProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </CartProvider>
+    </ErrorBoundary>    
 );

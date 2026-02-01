@@ -9,7 +9,8 @@ import useProducts from "../hooks/useProducts";
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const { products, loading } = useProducts();
+    const { products, loading, error } = useProducts();
+
 
   return (
     <div className="home">
@@ -90,16 +91,12 @@ const Home = () => {
       {/* PRODUCTS */}
       <section id="products" className="products">
         <h2>Featured Products</h2>
-        {!loading && (
-  <ProductList
-  products={
-    selectedCategory === "all"
-      ? products
-      : products.filter(p => p.category === selectedCategory)
-  }
-  limit={7}
-/>
+        {loading && <p>Loading products...</p>}
 
+{error && <p style={{ color: "red" }}>{error}</p>}
+
+{!loading && !error && (
+  <ProductList products={products} limit={7} />
 )}
 
       </section>

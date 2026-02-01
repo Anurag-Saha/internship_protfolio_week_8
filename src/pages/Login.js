@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email);
-    navigate("/checkout");
+    navigate("/");
   };
 
   return (

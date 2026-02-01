@@ -6,7 +6,8 @@ import "./Shop.css";
 const ITEMS_PER_PAGE = 15;
 
 const Shop = () => {
-  const { products, loading } = useProducts();
+  const { products, loading, error } = useProducts();
+
 
 const [category, setCategory] = useState("all");
 const [sort, setSort] = useState("default");
@@ -54,7 +55,13 @@ const filtered = products.filter(p => {
     setCurrentPage(1);
   }, [category, sort]);
 
-  if (loading) return <p className="loading">Loading products...</p>;
+  if (loading) {
+  return <p className="loading">Loading products...</p>;
+}
+
+if (error) {
+  return <p style={{ color: "red" }}>{error}</p>;
+}
 
   return (
     <div className="shop-page container">
